@@ -2,7 +2,7 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- vues pour les equipes par poules et par saisons
 ------------------------------------------------------------------------------------------------------------------------
-CREATE VIEW "LP_2425".equipe_poule AS
+CREATE VIEW LP_2425.equipe_poule AS
 WITH t_all AS (
     SELECT 
         s.id_saison,
@@ -14,15 +14,15 @@ WITH t_all AS (
         e.id_equipe,
         e.nom_equipe,
         e.abreviation
-    FROM "LP_2425".equipes e
-    LEFT JOIN "LP_2425".poules p ON e.id_poule = p.id_poule
-    LEFT JOIN "LP_2425".saisons s ON p.id_saison = s.id_saison
+    FROM LP_2425.equipes e
+    LEFT JOIN LP_2425.poules p ON e.id_poule = p.id_poule
+    LEFT JOIN LP_2425.saisons s ON p.id_saison = s.id_saison
 )
 SELECT nom_saison, nom_equipe, nom_poule, abreviation FROM t_all;
 ------------------------------------------------------------------------------------------------------------------------
 -- vues pour avoir le nombre de victoires, nuls et défaites
 ------------------------------------------------------------------------------------------------------------------------
-CREATE OR REPLACE VIEW "LP_2425".equipe_resultats AS
+CREATE VIEW LP_2425.equipe_resultats AS
 WITH vdn_dom_ext AS (
     SELECT 
         e.nom_equipe,
@@ -36,9 +36,9 @@ WITH vdn_dom_ext AS (
         COUNT(CASE WHEN m.buts_exterieur > m.buts_domicile AND m.equipe_exterieur = e.abreviation THEN 1 END) AS victoires_exterieur,
         COUNT(CASE WHEN m.buts_exterieur < m.buts_domicile AND m.equipe_exterieur = e.abreviation THEN 1 END) AS defaites_exterieur,
         COUNT(CASE WHEN m.buts_exterieur = m.buts_domicile AND m.equipe_exterieur = e.abreviation THEN 1 END) AS nuls_exterieur
-    FROM "LP_2425".equipes e
-    LEFT JOIN "LP_2425".matchs m ON e.abreviation = m.equipe_domicile OR e.abreviation = m.equipe_exterieur
-    LEFT JOIN "LP_2425".poules p ON e.id_poule = p.id_poule 
+    FROM LP_2425.equipes e
+    LEFT JOIN LP_2425.matchs m ON e.abreviation = m.equipe_domicile OR e.abreviation = m.equipe_exterieur
+    LEFT JOIN LP_2425.poules p ON e.id_poule = p.id_poule 
     WHERE m.statut = 'Terminé'
     GROUP BY e.nom_equipe, e.abreviation, p.nom_poule
 )
@@ -60,7 +60,7 @@ FROM vdn_dom_ext;
 ------------------------------------------------------------------------------------------------------------------------
 -- vues pour avoir le nombre de buts marqués et encaissés
 ------------------------------------------------------------------------------------------------------------------------
-CREATE OR REPLACE VIEW "LP_2425".equipe_buts AS
+CREATE OR REPLACE VIEW LP_2425.equipe_buts AS
 WITH buts_dom_ext AS (
     SELECT 
         e.nom_equipe,
@@ -72,9 +72,9 @@ WITH buts_dom_ext AS (
         -- Buts marqués et encaissés à l'extérieur
         SUM(CASE WHEN m.equipe_exterieur = e.abreviation THEN m.buts_exterieur ELSE 0 END) AS buts_marques_exterieur,
         SUM(CASE WHEN m.equipe_exterieur = e.abreviation THEN m.buts_domicile ELSE 0 END) AS buts_encaisses_exterieur
-    FROM "LP_2425".equipes e
-    LEFT JOIN "LP_2425".matchs m ON e.abreviation = m.equipe_domicile OR e.abreviation = m.equipe_exterieur
-    LEFT JOIN "LP_2425".poules p ON e.id_poule = p.id_poule
+    FROM LP_2425.equipes e
+    LEFT JOIN LP_2425.matchs m ON e.abreviation = m.equipe_domicile OR e.abreviation = m.equipe_exterieur
+    LEFT JOIN LP_2425.poules p ON e.id_poule = p.id_poule
     WHERE m.statut = 'Terminé'
     GROUP BY 
         e.nom_equipe, e.abreviation, p.nom_poule
@@ -95,7 +95,7 @@ FROM
 ------------------------------------------------------------------------------------------------------------------------
 -- vues du classement
 ------------------------------------------------------------------------------------------------------------------------
-CREATE VIEW "LP_2425".classement AS
+CREATE VIEW LP_2425.classement AS
 SELECT 
     e.id_poule,
     e.nom_equipe,
@@ -109,9 +109,9 @@ SELECT
     er.total_victoires,
     er.total_nuls,
     er.total_defaites
-FROM "LP_2425".equipes e
-JOIN "LP_2425".equipe_resultats er ON e.abreviation = er.abreviation
-JOIN "LP_2425".equipe_buts eb ON e.abreviation = eb.abreviation
+FROM LP_2425.equipes e
+JOIN LP_2425.equipe_resultats er ON e.abreviation = er.abreviation
+JOIN LP_2425.equipe_buts eb ON e.abreviation = eb.abreviation
 ORDER BY 
     e.id_poule,
     points DESC,

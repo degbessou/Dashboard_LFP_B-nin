@@ -1,7 +1,7 @@
 ------------------------------------------------------------------------------------------------------------------------
 -- création de la table log : journees_log
 ------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE "LP_2425".journees_log (
+CREATE TABLE LP_2425.journees_log (
     log_id SERIAL PRIMARY KEY,
     operation_type   VARCHAR(10) NOT NULL,  -- INSERT, UPDATE, DELETE
     changed_by       VARCHAR(100) NOT NULL, -- Utilisateur ou système qui a fait la modification
@@ -20,15 +20,15 @@ CREATE TABLE "LP_2425".journees_log (
 );
 --
 -- Création d'un index pour améliorer les performances de requête
-CREATE INDEX idx_journees_log_id_journee ON "LP_2425".journees_log(id_journee);
-CREATE INDEX idx_journees_log_timestamp ON "LP_2425".journees_log(change_timestamp);
+CREATE INDEX idx_journees_log_id_journee ON LP_2425.journees_log(id_journee);
+CREATE INDEX idx_journees_log_timestamp ON LP_2425.journees_log(change_timestamp);
 --
 -- création de la fonction
-CREATE OR REPLACE FUNCTION "LP_2425".log_journees_changes()
+CREATE OR REPLACE FUNCTION LP_2425.log_journees_changes()
 RETURNS TRIGGER AS $$
 BEGIN
     IF (TG_OP = 'DELETE') THEN
-        INSERT INTO "LP_2425".journees_log (
+        INSERT INTO LP_2425.journees_log (
             operation_type, changed_by,
             id_journee, old_id_poule, old_journee, old_phase, old_date_debut, old_date_fin
         ) VALUES (
@@ -36,7 +36,7 @@ BEGIN
             OLD.id_journee, OLD.id_poule, OLD.journee, OLD.phase, OLD.date_debut, OLD.date_fin
         );
     ELSIF (TG_OP = 'UPDATE') THEN
-        INSERT INTO "LP_2425".journees_log (
+        INSERT INTO LP_2425.journees_log (
             operation_type, changed_by,
             id_journee, 
             old_id_poule, 
@@ -64,7 +64,7 @@ BEGIN
             NEW.date_fin
         );
     ELSIF (TG_OP = 'INSERT') THEN
-        INSERT INTO "LP_2425".journees_log (
+        INSERT INTO LP_2425.journees_log (
             operation_type, changed_by,
             id_journee, new_id_poule, new_journee, new_phase, new_date_debut, new_date_fin
         ) VALUES (
@@ -78,12 +78,12 @@ $$ LANGUAGE plpgsql;
 --
 -- Création du trigger
 CREATE TRIGGER trg_journees_log
-AFTER INSERT OR UPDATE OR DELETE ON "LP_2425".journees
-FOR EACH ROW EXECUTE FUNCTION "LP_2425".log_journees_changes();
+AFTER INSERT OR UPDATE OR DELETE ON LP_2425.journees
+FOR EACH ROW EXECUTE FUNCTION LP_2425.log_journees_changes();
 ------------------------------------------------------------------------------------------------------------------------
 -- création de la table log : matchs_log
 ------------------------------------------------------------------------------------------------------------------------
-CREATE TABLE "LP_2425".matchs_log (
+CREATE TABLE LP_2425.matchs_log (
     log_id SERIAL PRIMARY KEY,
     operation_type         VARCHAR(10) NOT NULL,  -- INSERT, UPDATE, DELETE
     changed_by             VARCHAR(100) NOT NULL, -- Utilisateur ou système qui a fait la modification
@@ -108,16 +108,16 @@ CREATE TABLE "LP_2425".matchs_log (
 );
 --
 -- Création des index pour améliorer les performances
-CREATE INDEX idx_matchs_log_id_match ON "LP_2425".matchs_log(id_match);
-CREATE INDEX idx_matchs_log_timestamp ON "LP_2425".matchs_log(change_timestamp);
-CREATE INDEX idx_matchs_log_statut ON "LP_2425".matchs_log(old_statut, new_statut);
+CREATE INDEX idx_matchs_log_id_match ON LP_2425.matchs_log(id_match);
+CREATE INDEX idx_matchs_log_timestamp ON LP_2425.matchs_log(change_timestamp);
+CREATE INDEX idx_matchs_log_statut ON LP_2425.matchs_log(old_statut, new_statut);
 --
 -- création de la fonction
-CREATE OR REPLACE FUNCTION "LP_2425".log_matchs_changes()
+CREATE OR REPLACE FUNCTION LP_2425.log_matchs_changes()
 RETURNS TRIGGER AS $$
 BEGIN
     IF (TG_OP = 'DELETE') THEN
-        INSERT INTO "LP_2425".matchs_log (
+        INSERT INTO LP_2425.matchs_log (
             operation_type,
             changed_by,
             id_match,
@@ -142,7 +142,7 @@ BEGIN
             OLD.statut
         );
     ELSIF (TG_OP = 'UPDATE') THEN
-        INSERT INTO "LP_2425".matchs_log (
+        INSERT INTO LP_2425.matchs_log (
             operation_type,
             changed_by,
             id_match,
@@ -183,7 +183,7 @@ BEGIN
             NEW.statut
         );
     ELSIF (TG_OP = 'INSERT') THEN
-        INSERT INTO "LP_2425".matchs_log (
+        INSERT INTO LP_2425.matchs_log (
             operation_type,
             changed_by,
             id_match,
@@ -214,5 +214,5 @@ $$ LANGUAGE plpgsql;
 --
 -- Création du trigger
 CREATE TRIGGER trg_matchs_log
-AFTER INSERT OR UPDATE OR DELETE ON "LP_2425".matchs
-FOR EACH ROW EXECUTE FUNCTION "LP_2425".log_matchs_changes();
+AFTER INSERT OR UPDATE OR DELETE ON LP_2425.matchs
+FOR EACH ROW EXECUTE FUNCTION LP_2425.log_matchs_changes();
