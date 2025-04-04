@@ -494,9 +494,54 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J5B', 2, 'Coton', 'USSK', 1, 0, '2024-11-13', 'Terminé'),
 ('J6A', 1, 'BaniGansè', 'LotoPopo', 0, 1, '2024-11-07', 'Terminé'),
 ('J6B', 2, 'ASPAC', 'Coton', 2, 2, '2024-12-04', 'Terminé');
-
+--
+-- suite journees
+INSERT INTO LP_2425.journees (id_journee, journee, id_poule, phase, date_debut, date_fin) VALUES 
+('J23A', 'J23', 1, 'Retour', '2025-03-26', '2025-03-26'),
+('J23B', 'J23', 2, 'Retour', '2025-03-26', '2025-03-27'),
+('J24A', 'J24', 1, 'Retour', '2025-03-29', '2025-03-30'),
+('J24B', 'J24', 2, 'Retour', '2025-03-29', '2025-03-30');
+--
 -- J23
+INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES
+('J23A', 1, 'Boa', 'Dynamique', 1, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Buffles', 'RéalSport', 2, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Dadjè', 'D.Parakou', 1, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Damissa', 'Espoir', 0, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'D.Abomey', 'Abeilles', 3, 1, '2025-03-26', 'Terminé'),
+('J23A', 1, 'LotoPopo', 'BaniGansè', 1, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Panthères', 'Hodio', 1, 2, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Takunnin', 'Béké', 0, 0, '2025-03-26', 'Terminé'),
+('J23A', 1, 'Tonnerre', 'USCN', 1, 2, '2025-03-26', 'Terminé'),
+('J23B', 2, 'ASC', 'JAK', 2, 0, '2025-03-26', 'Terminé'),
+('J23B', 2, 'Ayema', 'Adjidja', 2, 3, '2025-03-26', 'Terminé'),
+('J23B', 2, 'AO', 'Police', 3, 1, '2025-03-26', 'Terminé'),
+('J23B', 2, 'Coton', 'ASPAC', 1, 1, '2025-03-26', 'Terminé'),
+('J23B', 2, 'Requins', 'ASVO', 0, 1, '2025-03-26', 'Terminé'),
+('J23B', 2, 'Sitatunga', 'Aziza', 2, 0, '2025-03-26', 'Terminé'),
+('J23B', 2, 'Etoiles', 'Dragons', 1, 2, '2025-03-27', 'Terminé'),
+('J23B', 2, 'JSO', 'Sobemap', null, null, '2025-03-26', 'Annulé'),
+('J23B', 2, 'JSP', 'USSK', 3, 2, '2025-03-27', 'Terminé');
 -- J24
+INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES
+('J24A', 1, 'BaniGansè', 'Damissa', 0, 0, '2025-03-29', 'Terminé'),
+('J24A', 1, 'D.Parakou', 'Takunnin', 0, 0, '2025-03-29', 'Terminé'),
+('J24A', 1, 'Hodio', 'Dadjè', 0, 0, '2025-03-29', 'Terminé'),
+('J24A', 1, 'RéalSport', 'Boa', 3, 1, '2025-03-29', 'Terminé'),
+('J24A', 1, 'Abeilles', 'Panthères', 2, 0, '2025-03-30', 'Terminé'),
+('J24A', 1, 'Béké', 'Buffles', 0, 1, '2025-03-30', 'Terminé'),
+('J24A', 1, 'USCN', 'D.Abomey', 0, 1, '2025-03-30', 'Terminé'),
+('J24A', 1, 'Dynamique', 'Tonnerre', 1, 1, '2025-03-30', 'Terminé'),
+('J24A', 1, 'Espoir', 'LotoPopo', 2, 1, '2025-03-30', 'Terminé'),
+('J24B', 2, 'ASPAC', 'Requins', 3, 1, '2025-03-29', 'Terminé'),
+('J24B', 2, 'Aziza', 'AO', 0, 2, '2025-03-29', 'Terminé'),
+('J24B', 2, 'JAK', 'Ayema', 1, 2, '2025-03-29', 'Terminé'),
+('J24B', 2, 'Dragons', 'Sitatunga', 0, 0, '2025-03-30', 'Terminé'),
+('J24B', 2, 'Adjidja', 'Etoiles', 1, 0, '2025-03-30', 'Terminé'),
+('J24B', 2, 'ASVO', 'Coton', 1, 1, '2025-03-30', 'Terminé'),
+('J24B', 2, 'Sobemap', 'JSP', 1, 1, '2025-03-30', 'Terminé'),
+('J23B', 2, 'Police', 'JSO', null, null, '2025-03-30', 'Annulé'),
+('J24B', 2, 'USSK', 'ASC', 1, 0, '2025-03-30', 'Terminé');
 -- J25
 -- J26
 -- J27
