@@ -404,7 +404,7 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J18B', 2, 'Aziza', 'Requins', 1, 2, '2025-02-16', 'Terminé'),
 ('J18B', 2, 'Adjidja', 'ASVO', 0, 2, '2025-02-16', 'Terminé'),
 ('J18B', 2, 'JAK', 'Coton', 1, 2, '2025-02-16', 'Terminé'),
-('J22B', 2, 'JSO', 'Ayema', null, null, '2025-02-16', 'Annulé'),
+('J18B', 2, 'JSO', 'Ayema', null, null, '2025-02-16', 'Annulé'),
 ('J18B', 2, 'AO', 'Etoiles', 1, 0, '2025-02-16', 'Terminé');
 -- J19
 INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
@@ -424,7 +424,7 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J19B', 2, 'Coton', 'Dragons', 1, 0, '2025-02-23', 'Terminé'),
 ('J19B', 2, 'Requins', 'JAK', 2, 2, '2025-02-23', 'Terminé'),
 ('J19B', 2, 'Ayema', 'Sobemap', 1, 0, '2025-02-23', 'Terminé'),
-('J22B', 2, 'JSO', 'Sitatunga', null, null, '2025-02-23', 'Annulé'),
+('J19B', 2, 'JSO', 'Sitatunga', null, null, '2025-02-23', 'Annulé'),
 ('J19B', 2, 'ASVO', 'USSK', 1, 1, '2025-02-23', 'Terminé');
 -- J20
 INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
@@ -444,7 +444,7 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J20B', 2, 'Aziza', 'Ayema', 1, 0, '2025-03-02', 'Terminé'),
 ('J20B', 2, 'Dragons', 'ASVO', 1, 0, '2025-03-02', 'Terminé'),
 ('J20B', 2, 'Sitatunga', 'Etoiles', 3, 1, '2025-03-02', 'Terminé'),
-('J22B', 2, 'AO', 'JSO', null, null, '2025-03-02', 'Annulé'),
+('J20B', 2, 'AO', 'JSO', null, null, '2025-03-02', 'Annulé'),
 ('J20B', 2, 'Sobemap', 'Coton', 0, 0, '2025-03-02', 'Terminé');
 -- J21
 INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
@@ -464,7 +464,7 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J21B', 2, 'Etoiles', 'USSK', 2, 3, '2025-03-09', 'Terminé'),
 ('J21B', 2, 'ASPAC', 'Dragons', 1, 1, '2025-03-09', 'Terminé'),
 ('J21B', 2, 'Ayema', 'AO', 1, 0, '2025-03-09', 'Terminé'),
-('J22B', 2, 'JSO', 'JAK', null, null, '2025-03-09', 'Annulé'),
+('J21B', 2, 'JSO', 'JAK', null, null, '2025-03-09', 'Annulé'),
 ('J21B', 2, 'Coton', 'Adjidja', 0, 0, '2025-03-09', 'Terminé');
 -- J22
 INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
@@ -487,10 +487,14 @@ INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exteri
 ('J22B', 2, 'Aziza', 'JSO', null, null, '2025-03-16', 'Annulé'),
 ('J22B', 2, 'JAK', 'Etoiles', 1, 2, '2025-03-16', 'Terminé');
 --
--- À executer
-update LP_2425.matchs
-    set statut = 'Annulé'
-    where equipe_domicile = 'JSO' or equipe_exterieur = 'JSO';
+-- update match reporté
+INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
+('J1A', 1, 'LotoPopo', 'Hodio', 0, 0, '2024-11-13', 'Terminé'),
+('J5A', 1, 'LotoPopo', 'Abeilles', 0, 1, '2024-12-04', 'Terminé'),
+('J5B', 2, 'Coton', 'USSK', 1, 0, '2024-11-13', 'Terminé'),
+('J6A', 1, 'BaniGansè', 'LotoPopo', 0, 1, '2024-11-07', 'Terminé'),
+('J6B', 2, 'ASPAC', 'Coton', 2, 2, '2024-12-04', 'Terminé');
+
 -- J23
 -- J24
 -- J25

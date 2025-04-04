@@ -1,0 +1,6 @@
+
+select * from LP_2425.matchs_log where operation_type = 'UPDATE'
+
+select * from LP_2425.matchs where equipe_domicile = 'JSO' or equipe_exterieur ='JSO'
+
+select ROW_NUMBER() OVER (ORDER BY points desc) AS rownum, abreviation, points, difference_buts from LP_2425.classement a where nom_poule = 'Poule B'
