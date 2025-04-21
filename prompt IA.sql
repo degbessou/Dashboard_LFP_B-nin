@@ -13,9 +13,9 @@ CREATE TABLE journees (
     phase       VARCHAR(50), -- Aller, Retour
     date_debut  DATE,
     date_fin    DATE,
-    FOREIGN KEY (id_poule) REFERENCES "LP_2425".poules(id_poule)
+    FOREIGN KEY (id_poule) REFERENCES LP_2425.poules(id_poule)
 );
-INSERT INTO "LP_2425".journees (id_journee, journee, id_poule, phase, date_debut, date_fin) VALUES 
+INSERT INTO LP_2425.journees (id_journee, journee, id_poule, phase, date_debut, date_fin) VALUES 
 ('J1A', 'J1', 1, 'Aller', '2024-09-21', '2024-09-29');
 -- Table des matchs
 CREATE TABLE matchs (
@@ -28,12 +28,12 @@ CREATE TABLE matchs (
     buts_exterieur   INT,
     date_match       TIMESTAMP,
     statut           VARCHAR(50) NOT NULL DEFAULT 'Programmé', -- Programmé, En cours, Terminé, Reporté, Annulé
-    FOREIGN KEY (id_journee) REFERENCES "LP_2425".journees(id_journee),
-    FOREIGN KEY (id_poule) REFERENCES "LP_2425".poules(id_poule),
-    FOREIGN KEY (equipe_domicile) REFERENCES "LP_2425".equipes(abreviation),
-    FOREIGN KEY (equipe_exterieur) REFERENCES "LP_2425".equipes(abreviation)
+    FOREIGN KEY (id_journee) REFERENCES LP_2425.journees(id_journee),
+    FOREIGN KEY (id_poule) REFERENCES LP_2425.poules(id_poule),
+    FOREIGN KEY (equipe_domicile) REFERENCES LP_2425.equipes(abreviation),
+    FOREIGN KEY (equipe_exterieur) REFERENCES LP_2425.equipes(abreviation)
 );
-INSERT INTO "LP_2425".matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
+INSERT INTO LP_2425.matchs (id_journee, id_poule, equipe_domicile, equipe_exterieur, buts_domicile, buts_exterieur, date_match, statut) VALUES 
 ('J1A', 1, 'Panthères', 'Buffles', 0, 0, '2024-09-21', 'Terminé'),
 ('J1A', 1, 'LotoPopo', 'Hodio', NULL, NULL, '2024-09-28', 'Reporté');
 -- les noms d'equipes et abreviattions
@@ -74,4 +74,6 @@ INSERT INTO "LP_2425".matchs (id_journee, id_poule, equipe_domicile, equipe_exte
 "JA Kétou"  "JAK"
 "Etoiles Filantes FC"   "Etoiles"
 "Avrankou Omnisport"    "AO"
+--
+pour la poule b, tu constateras qu'il manque toujours un match avec l'equipe JSO. rajoute cette insertion avec l'autre equipe non utilisée avec les scores null et le statut annulé. genere juste cette ligne.
 /*
